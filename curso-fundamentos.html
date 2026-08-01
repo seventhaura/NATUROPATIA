@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos de la Naturopatía | Empezar Curso</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #2c3e2d;
+      background: #f9f7f2;
+    }
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #3d5a40;
+      text-decoration: none;
+    }
+    .logo span { color: #c9a227; }
+    .nav a {
+      text-decoration: none;
+      color: #2c3e2d;
+      font-weight: 500;
+      margin-left: 1.5rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.4rem;
+      color: #2c3e2d;
+    }
+    .course-label {
+      display: inline-block;
+      background: #3d5a40;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .subtitle {
+      color: #5a6b5c;
+      margin-bottom: 2.5rem;
+      font-size: 1.15rem;
+    }
+
+    /* Video / Welcome */
+    .welcome-box {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      margin-bottom: 3rem;
+    }
+    .video-placeholder {
+      background: linear-gradient(135deg, #3d5a40, #5a7a5c);
+      height: 280px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .video-placeholder .play {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      opacity: 0.9;
+    }
+    .doctors-message {
+      background: #f0f5f0;
+      border-left: 4px solid #3d5a40;
+      padding: 1.3rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      font-size: 1.05rem;
+      color: #2c3e2d;
+    }
+
+    /* Quiz */
+    .quiz-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2.2rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+    .quiz-section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+    .quiz-section .intro {
+      color: #5a6b5c;
+      margin-bottom: 2rem;
+    }
+    .question {
+      margin-bottom: 2.2rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid #e8eee8;
+    }
+    .question:last-of-type { border-bottom: none; }
+    .question h3 {
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      color: #2c3e2d;
+    }
+    .options label {
+      display: block;
+      background: #f9f7f2;
+      padding: 0.85rem 1.1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 2px solid transparent;
+    }
+    .options label:hover {
+      background: #eef5ee;
+    }
+    .options input {
+      margin-right: 0.7rem;
+      transform: scale(1.15);
+    }
+    .submit-quiz {
+      background: #3d5a40;
+      color: white;
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+    .submit-quiz:hover { background: #2c3e2d; }
+
+    #results {
+      display: none;
+      margin-top: 2.5rem;
+      padding: 1.8rem;
+      background: #eef5ee;
+      border-radius: 14px;
+      text-align: center;
+    }
+    #results h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .score {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #3d5a40;
+      margin: 0.8rem 0;
+    }
+
+    footer {
+      background: #1e2b1f;
+      color: #a3b5a5;
+      text-align: center;
+      padding: 1.6rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <a href="index.html" class="logo">NATURO<span>PATÍA</span></a>
+      <div>
+        <a href="index.html">Inicio</a>
+        <a href="cursos.html">Cursos</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="course-label">Curso</div>
+    <h1>Fundamentos de la Naturopatía</h1>
+    <p class="subtitle">Bienvenido · Drs. Néstor & Frania Lepe</p>
+
+    <!-- WELCOME / VIDEO SECTION -->
+    <div class="welcome-box">
+      <div class="video-placeholder">
+        <div class="play">▶</div>
+        <div style="font-size:1.2rem; font-weight:600;">Video de Bienvenida</div>
+        <div style="opacity:0.85; margin-top:0.4rem; font-size:0.95rem;">
+          Drs. Néstor y Frania Lepe<br>
+          Fundamentos de la Naturopatía
+        </div>
+      </div>
+
+      <div class="doctors-message">
+        <strong>Mensaje de los doctores:</strong><br><br>
+        “¡Felicitaciones por comenzar el curso <em>Fundamentos de la Naturopatía</em>!  
+        En las próximas semanas vamos a construir una base sólida: los principios vitalistas, la fuerza curativa de la naturaleza, y cómo evaluar y acompañar al terreno del paciente.  
+        Este cuestionario inicial nos ayuda a conocer tu punto de partida. Respóndelo con calma y honestidad.  
+        Estamos muy contentos de acompañarte en este camino.”  
+        <br><br>
+        — Dr. Néstor Lepe & Dra. Frania Lepe
+      </div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div class="quiz-section">
+      <h2>Cuestionario Inicial</h2>
+      <p class="intro">Responde las siguientes 10 preguntas. Esto nos ayuda a conocer tu nivel actual sobre los fundamentos de la naturopatía.</p>
+
+      <form id="quizForm">
+
+        <!-- 1 -->
+        <div class="question">
+          <h3>1. La naturopatía se basa principalmente en el principio de que el cuerpo tiene una fuerza vital de autocuración.</h3>
+          <div class="options">
+            <label><input type="radio" name="q1" value="true"> Verdadero</label>
+            <label><input type="radio" name="q1" value="false"> Falso</label>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="question">
+          <h3>2. ¿Cuál de los siguientes es uno de los principios fundamentales de la naturopatía?</h3>
+          <div class="options">
+            <label><input type="radio" name="q2" value="a"> Primero no hacer daño (Primum non nocere)</label>
+            <label><input type="radio" name="q2" value="b"> Usar siempre la mayor cantidad de medicamentos posible</label>
+            <label><input type="radio" name="q2" value="c"> Ignorar la causa raíz de la enfermedad</label>
+            <label><input type="radio" name="q2" value="d"> Tratar solo los síntomas</label>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="question">
+          <h3>3. El “terreno” del paciente se refiere a:</h3>
+          <div class="options">
+            <label><input type="radio" name="q3" value="a"> El lugar donde vive</label>
+            <label><input type="radio" name="q3" value="b"> El estado interno y la vitalidad del organismo</label>
+            <label><input type="radio" name="q3" value="c"> Solo su peso corporal</label>
+            <label><input type="radio" name="q3" value="d"> Su historial de cirugías</label>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="question">
+          <h3>4. Las plantas medicinales nunca deben combinarse entre sí.</h3>
+          <div class="options">
+            <label><input type="radio" name="q4" value="true"> Verdadero</label>
+            <label><input type="radio" name="q4" value="false"> Falso</label>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="question">
+          <h3>5. ¿Qué órgano se considera central en la mayoría de los protocolos de desintoxicación natural?</h3>
+          <div class="options">
+            <label><input type="radio" name="q5" value="a"> El bazo</label>
+            <label><input type="radio" name="q5" value="b"> El hígado</label>
+            <label><input type="radio" name="q5" value="c"> La vesícula biliar únicamente</label>
+            <label><input type="radio" name="q5" value="d"> Los pulmones</label>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="question">
+          <h3>6. La alimentación consciente en naturopatía se enfoca solo en contar calorías.</h3>
+          <div class="options">
+            <label><input type="radio" name="q6" value="true"> Verdadero</label>
+            <label><input type="radio" name="q6" value="false"> Falso</label>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="question">
+          <h3>7. ¿Cuál es una característica importante de las plantas adaptógenas?</h3>
+          <div class="options">
+            <label><input type="radio" name="q7" value="a"> Ayudan al cuerpo a adaptarse al estrés</label>
+            <label><input type="radio" name="q7" value="b"> Solo se usan para dormir</label>
+            <label><input type="radio" name="q7" value="c"> Son tóxicas en dosis bajas</label>
+            <label><input type="radio" name="q7" value="d"> No tienen ningún efecto sobre el sistema nervioso</label>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="question">
+          <h3>8. En naturopatía se busca siempre eliminar la causa raíz en lugar de solo aliviar síntomas.</h3>
+          <div class="options">
+            <label><input type="radio" name="q8" value="true"> Verdadero</label>
+            <label><input type="radio" name="q8" value="false"> Falso</label>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="question">
+          <h3>9. ¿Qué práctica es comúnmente recomendada para apoyar la eliminación a través de la piel?</h3>
+          <div class="options">
+            <label><input type="radio" name="q9" value="a"> Saunas y baños de contraste</label>
+            <label><input type="radio" name="q9" value="b"> Comer solo alimentos crudos</label>
+            <label><input type="radio" name="q9" value="c"> Evitar completamente el agua</label>
+            <label><input type="radio" name="q9" value="d"> Dormir menos horas</label>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="question">
+          <h3>10. El objetivo principal de este curso es que el estudiante pueda recetar medicamentos de síntesis.</h3>
+          <div class="options">
+            <label><input type="radio" name="q10" value="true"> Verdadero</label>
+            <label><input type="radio" name="q10" value="false"> Falso</label>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-quiz">Ver mis resultados</button>
+      </form>
+
+      <div id="results">
+        <h3>¡Cuestionario completado!</h3>
+        <div class="score" id="scoreDisplay">0/10</div>
+        <p id="feedback"></p>
+        <p style="margin-top:1.2rem; color:#5a6b5c;">
+          Gracias por completar el cuestionario inicial del curso <strong>Fundamentos de la Naturopatía</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Naturopatía · Drs. Néstor & Frania Lepe
+  </footer>
+
+  <script>
+    const answers = {
+      q1: "true",
+      q2: "a",
+      q3: "b",
+      q4: "false",
+      q5: "b",
+      q6: "false",
+      q7: "a",
+      q8: "true",
+      q9: "a",
+      q10: "false"
+    };
+
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let score = 0;
+
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      document.getElementById("scoreDisplay").textContent = score + "/10";
+      
+      let feedback = "";
+      if (score >= 8) feedback = "¡Excelente base de conocimiento!";
+      else if (score >= 5) feedback = "Buen punto de partida. Vamos a fortalecer estos conceptos juntos.";
+      else feedback = "Perfecto, empezamos desde los fundamentos. Este curso te va a ayudar mucho.";
+
+      document.getElementById("feedback").textContent = feedback;
+      document.getElementById("results").style.display = "block";
+      document.getElementBy
