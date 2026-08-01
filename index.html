@@ -1,1 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturopatía | Drs. Néstor & Frania Lepe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #2c3e2d;
+      background: #f9f7f2;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #3d5a40;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: #c9a227;
+    }
+
+    .cta-btn {
+      background: #3d5a40;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover {
+      background: #2c3e2d;
+      transform: translateY(-2px);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      background: linear-gradient(135deg, #eef5ee 0%, #f9f7f2 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      color: #2c3e2d;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero p.lead {
+      font-size: 1.25rem;
+      color: #5a6b5c;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .doctors {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .doctor-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      width: 280px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .doctor-photo {
+      width: 120px;
+      height: 120px;
+      background: #d4e0d5;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #3d5a40;
+    }
+
+    .doctor-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
+      color: #2c3e2d;
+    }
+
+    .doctor-card .title {
+      font-size: 0.9rem;
+      color: #c9a227;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .doctor-card p {
+      font-size: 0.95rem;
+      color: #5a6b5c;
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #2c3e2d;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #6b7c6d;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    /* ========== TESTIMONIOS ========== */
+    .testimonials {
+      background: white;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .testimonial {
+      background: #f9f7f2;
+      border-radius: 14px;
+      padding: 1.8rem;
+      border-left: 4px solid #3d5a40;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      color: #3d4a3e;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial .author {
+      font-weight: 600;
+      color: #2c3e2d;
+      font-size: 0.95rem;
+    }
+
+    .testimonial .role {
+      font-size: 0.85rem;
+      color: #7a8b7c;
+    }
+
+    /* ========== CURSOS ========== */
+    .courses {
+      background: #eef5ee;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .course-image {
+      height: 160px;
+      background: linear-gradient(135deg, #3d5a40, #5a7a5c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.8rem;
+    }
+
+    .course-content {
+      padding: 1.5rem;
+    }
+
+    .course-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: #2c3e2d;
+    }
+
+    .course-content p {
+      color: #5a6b5c;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .course-btn {
+      display: inline-block;
+      background: #c9a227;
+      color: white;
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .course-btn:hover {
+      background: #b08d1f;
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      background: #2c3e2d;
+      color: white;
+    }
+
+    .contact .section-title {
+      color: white;
+    }
+
+    .contact .section-subtitle {
+      color: #b8c9ba;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 700px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info h3 {
+      margin-bottom: 1rem;
+      color: #c9a227;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.8rem;
+      color: #d4e0d5;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      transition: background 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1da851;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      padding: 0.9rem 1.1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: #c9a227;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #b08d1f;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1e2b1f;
+      color: #a3b5a5;
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 0.9rem;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav">
+      <div class="logo">NATURO<span>PATÍA</span></div>
+      <a href="#cursos" class="cta-btn">Ver Cursos Disponibles</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Sanación Natural & Holística</h1>
+    <p class="lead">
+      Aprende de la mano de los doctores Néstor y Frania Lepe. 
+      Formación práctica en naturopatía, salud integral y terapias naturales.
+    </p>
+
+    <div class="doctors">
+      <div class="doctor-card">
+        <div class="doctor-photo">NL</div>
+        <h3>Dr. Néstor Lepe</h3>
+        <div class="title">Naturopatía & Medicina Holística</div>
+        <p>Especialista en el restablecimiento de la salud a través de métodos naturales y el equilibrio del cuerpo.</p>
+      </div>
+
+      <div class="doctor-card">
+        <div class="doctor-photo">FL</div>
+        <h3>Dra. Frania Lepe</h3>
+        <div class="title">Sanación Integral & Terapias Naturales</div>
+        <p>Experta en acompañamiento terapéutico, alimentación consciente y técnicas de sanación holística.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonials" id="testimonios">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros estudiantes</h2>
+      <p class="section-subtitle">Experiencias reales de quienes ya transformaron su salud</p>
+
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p>“Después del curso de desintoxicación, mi energía cambió por completo. Los doctores explican de una forma muy clara y práctica.”</p>
+          <div class="author">María G.</div>
+          <div class="role">Estudiante – Curso de Desintoxicación</div>
+        </div>
+
+        <div class="testimonial">
+          <p>“Nunca pensé que podría manejar mi ansiedad de forma natural. Las herramientas que me dieron siguen siendo parte de mi día a día.”</p>
+          <div class="author">Carlos R.</div>
+          <div class="role">Cliente & Estudiante</div>
+        </div>
+
+        <div class="testimonial">
+          <p>“La formación es profunda pero accesible. Se nota la experiencia y el amor con el que enseñan los doctores Lepe.”</p>
+          <div class="author">Ana L.</div>
+          <div class="role">Estudiante de Naturopatía</div>
+        </div>
+
+        <div class="testimonial">
+          <p>“Recomiendo totalmente sus cursos. Aprendí a escuchar mi cuerpo y a usar plantas medicinales con seguridad.”</p>
+          <div class="author">Jorge M.</div>
+          <div class="role">Estudiante</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section class="courses" id="cursos">
+    <div class="container">
+      <h2 class="section-title">Cursos Disponibles</h2>
+      <p class="section-subtitle">Formación online práctica y con acompañamiento</p>
+
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-image">🌿</div>
+          <div class="course-content">
+            <h3>Introducción a la Naturopatía</h3>
+            <p>Bases sólidas de la medicina natural, principios vitalistas y cómo el cuerpo se autorregula.</p>
+            <a href="#contacto" class="course-btn">Más información</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-image">🍃</div>
+          <div class="course-content">
+            <h3>Desintoxicación Natural</h3>
+            <p>Protocolos seguros y efectivos para limpiar el organismo usando métodos naturales.</p>
+            <a href="#contacto" class="course-btn">Más información</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-image">🥗</div>
+          <div class="course-content">
+            <h3>Alimentación Consciente</h3>
+            <p>Cómo nutrir el cuerpo de forma inteligente según la constitución y el estilo de vida.</p>
+            <a href="#contacto" class="course-btn">Más información</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-image">🧘</div>
+          <div class="course-content">
+            <h3>Manejo Natural del Estrés</h3>
+            <p>Herramientas prácticas con hierbas, respiración y hábitos para recuperar el equilibrio.</p>
+            <a href="#contacto" class="course-btn">Más información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <div class="container">
+      <h2 class="section-title">Contáctanos</h2>
+      <p class="section-subtitle">¿Quieres más información sobre los cursos o agendar una consulta?</p>
+
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>Hablemos</h3>
+          <p>Estamos aquí para acompañarte en tu camino hacia una salud más natural y consciente.</p>
+          <p><strong>Email:</strong> contacto@naturopatia.com</p>
+          <p><strong>Horario:</strong> Lunes a Viernes · 9:00 – 18:00</p>
+          
+          <a href="https://wa.me/52XXXXXXXXXX" class="whatsapp-btn" target="_blank">
+            WhatsApp Directo
+          </a>
+        </div>
+
+        <form>
+          <input type="text" placeholder="Tu nombre" required>
+          <input type="email" placeholder="Tu correo electrónico" required>
+          <textarea placeholder="¿En qué podemos ayudarte?"></textarea>
+          <button type="submit" class="submit-btn">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Naturopatía · Drs. Néstor & Frania Lepe · Todos los derechos reservados
+  </footer>
+
+</body>
+</html>
