@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos | Naturopatía - Drs. Néstor & Frania Lepe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #2c3e2d;
+      background: #f9f7f2;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #3d5a40;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #c9a227;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2c3e2d;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #3d5a40;
+    }
+
+    .cta-btn {
+      background: #3d5a40;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover {
+      background: #2c3e2d;
+      transform: translateY(-2px);
+    }
+
+    /* ========== HERO ========== */
+    .page-hero {
+      background: linear-gradient(135deg, #eef5ee 0%, #f9f7f2 100%);
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-size: 2.5rem;
+      color: #2c3e2d;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .page-hero p {
+      font-size: 1.2rem;
+      color: #5a6b5c;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* ========== COURSES ========== */
+    .courses-section {
+      padding: 4.5rem 1.5rem 5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .course-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.09);
+    }
+
+    .course-image {
+      background: linear-gradient(135deg, #3d5a40, #5a7a5c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      color: white;
+    }
+
+    .course-body {
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .course-header {
+      margin-bottom: 1rem;
+    }
+
+    .course-header h2 {
+      font-size: 1.45rem;
+      color: #2c3e2d;
+      margin-bottom: 0.4rem;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+      color: #6b7c6d;
+      margin-bottom: 0.8rem;
+    }
+
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .course-description {
+      color: #4a5c4b;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .course-learn {
+      margin-bottom: 1.4rem;
+    }
+
+    .course-learn h4 {
+      font-size: 0.95rem;
+      color: #3d5a40;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-learn ul {
+      padding-left: 1.2rem;
+      color: #5a6b5c;
+      font-size: 0.95rem;
+    }
+
+    .course-learn li {
+      margin-bottom: 0.25rem;
+    }
+
+    .course-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #2c3e2d;
+    }
+
+    .price span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b7c6d;
+    }
+
+    .course-btn {
+      background: #c9a227;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.3s;
+    }
+
+    .course-btn:hover {
+      background: #b08d1f;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .course-card {
+        grid-template-columns: 1fr;
+      }
+      .course-image {
+        height: 160px;
+      }
+      .page-hero h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* ========== CTA BANNER ========== */
+    .cta-banner {
+      background: #2c3e2d;
+      color: white;
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .cta-banner h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-banner p {
+      color: #b8c9ba;
+      margin-bottom: 1.8rem;
+      font-size: 1.1rem;
+    }
+
+    .cta-banner .cta-btn {
+      background: #c9a227;
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+    }
+
+    .cta-banner .cta-btn:hover {
+      background: #b08d1f;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1e2b1f;
+      color: #a3b5a5;
+      text-align: center;
+      padding: 1.8rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav">
+      <a href="index.html" class="logo">NATURO<span>PATÍA</span></a>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="index.html#contacto" class="cta-btn">Contactar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <h1>Nuestros Cursos</h1>
+    <p>Formación práctica y profunda en salud natural, guiada por los doctores Néstor y Frania Lepe.</p>
+  </section>
+
+  <!-- COURSES LIST -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="course-list">
+
+        <!-- Course 1 -->
+        <article class="course-card">
+          <div class="course-image">🌿</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Fundamentos de la Naturopatía</h2>
+                <div class="course-meta">
+                  <span>⏱ 8 semanas</span>
+                  <span>📚 Nivel Principiante</span>
+                </div>
+              </div>
+              <p class="course-description">
+                El punto de partida ideal. Comprende los principios vitalistas, la fuerza curativa de la naturaleza y cómo el cuerpo se autorregula cuando se le dan las condiciones adecuadas.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Historia y filosofía de la naturopatía</li>
+                  <li>Los 6 principios fundamentales</li>
+                  <li>Evaluación holística del paciente</li>
+                  <li>Herramientas básicas de intervención natural</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Course 2 -->
+        <article class="course-card">
+          <div class="course-image">🍃</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Desintoxicación y Depuración Natural</h2>
+                <div class="course-meta">
+                  <span>⏱ 6 semanas</span>
+                  <span>📚 Nivel Intermedio</span>
+                </div>
+              </div>
+              <p class="course-description">
+                Protocolos seguros y efectivos para apoyar los órganos de eliminación. Ideal para quienes buscan recuperar energía, claridad mental y un sistema más limpio.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Fases de una desintoxicación bien estructurada</li>
+                  <li>Apoyo al hígado, intestinos, riñones y piel</li>
+                  <li>Ayunos, jugos y dietas de eliminación</li>
+                  <li>Señales de alerta y contraindicaciones</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Course 3 -->
+        <article class="course-card">
+          <div class="course-image">🥗</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Alimentación Consciente & Nutrición Ortomolecular</h2>
+                <div class="course-meta">
+                  <span>⏱ 7 semanas</span>
+                  <span>📚 Nivel Principiante-Intermedio</span>
+                </div>
+              </div>
+              <p class="course-description">
+                Aprende a usar la comida como medicina. Desde la calidad de los alimentos hasta la individualización según la constitución de cada persona.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Principios de la nutrición ortomolecular</li>
+                  <li>Alimentos vivos, densos y regenerativos</li>
+                  <li>Cómo diseñar platos según el terreno del paciente</li>
+                  <li>Suplementación inteligente y justificada</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Course 4 -->
+        <article class="course-card">
+          <div class="course-image">🌱</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Fitoterapia Clínica</h2>
+                <div class="course-meta">
+                  <span>⏱ 9 semanas</span>
+                  <span>📚 Nivel Intermedio</span>
+                </div>
+              </div>
+              <p class="course-description">
+                El uso terapéutico de las plantas medicinales con criterio clínico. Desde la identificación hasta la preparación y dosificación segura.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Principales plantas y sus acciones terapéuticas</li>
+                  <li>Preparación de tinturas, infusiones y óleos</li>
+                  <li>Combinaciones sinérgicas</li>
+                  <li>Seguridad, interacciones y dosis</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Course 5 -->
+        <article class="course-card">
+          <div class="course-image">🧘</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Manejo Natural del Estrés y del Sistema Nervioso</h2>
+                <div class="course-meta">
+                  <span>⏱ 5 semanas</span>
+                  <span>📚 Nivel Principiante</span>
+                </div>
+              </div>
+              <p class="course-description">
+                Herramientas prácticas y profundas para regular el sistema nervioso, mejorar el sueño y recuperar la calma de forma natural.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Fisiología del estrés y del eje HPA</li>
+                  <li>Plantas adaptógenas y nervinas</li>
+                  <li>Técnicas de respiración y anclaje</li>
+                  <li>Hábitos que reconstruyen la resiliencia</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Course 6 -->
+        <article class="course-card">
+          <div class="course-image">💚</div>
+          <div class="course-body">
+            <div>
+              <div class="course-header">
+                <h2>Formación Profesional en Naturopatía</h2>
+                <div class="course-meta">
+                  <span>⏱ 9 meses</span>
+                  <span>📚 Nivel Avanzado</span>
+                </div>
+              </div>
+              <p class="course-description">
+                El programa completo para quienes desean ejercer. Incluye todos los módulos anteriores más clínica, casos reales y acompañamiento personalizado de los doctores Lepe.
+              </p>
+              <div class="course-learn">
+                <h4>Lo que aprenderás:</h4>
+                <ul>
+                  <li>Todos los módulos fundamentales</li>
+                  <li>Evaluación y diseño de protocolos</li>
+                  <li>Casos clínicos reales</li>
+                  <li>Ética y práctica profesional</li>
+                </ul>
+              </div>
+            </div>
+            <div class="course-footer">
+              <div class="price">Consultar <span>precio</span></div>
+              <a href="index.html#contacto" class="course-btn">Solicitar información</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <h2>¿No sabes por dónde empezar?</h2>
+    <p>Escríbenos y te orientamos según tu nivel y objetivos.</p>
+    <a href="index.html#contacto" class="cta-btn">Hablar con nosotros</a>
+  </section>
+
+  <footer>
+    © 2026 Naturopatía · Drs. Néstor & Frania Lepe · Todos los derechos reservados
+  </footer>
+
+</body>
+</html>
