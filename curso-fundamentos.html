@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fundamentos de la Naturopatía | Curso</title>
- 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -68,7 +67,6 @@
       margin-bottom: 2.5rem;
       font-size: 1.15rem;
     }
-    /* Auth Box */
     .auth-box {
       background: white;
       border-radius: 16px;
@@ -119,7 +117,6 @@
       margin-bottom: 1rem;
       font-size: 0.95rem;
     }
-    /* Locked message */
     .locked-box {
       background: white;
       border-radius: 16px;
@@ -138,7 +135,6 @@
       text-decoration: none;
       font-weight: 600;
     }
-    /* Welcome + Quiz styles */
     .welcome-box {
       background: white;
       border-radius: 16px;
@@ -249,7 +245,7 @@
       <div class="auth-box">
         <h2 id="auth-title">Iniciar Sesión</h2>
         <div id="auth-error" class="error-msg"></div>
-       
+      
         <form id="auth-form">
           <input type="text" id="full-name" placeholder="Nombre completo" style="display:none;">
           <input type="email" id="email" placeholder="Correo electrónico" required>
@@ -262,7 +258,7 @@
         </div>
       </div>
     </div>
-    <!-- LOCKED (not enrolled) -->
+    <!-- LOCKED -->
     <div id="locked-section" style="display:none;">
       <div class="locked-box">
         <h2>Curso bloqueado</h2>
@@ -391,10 +387,13 @@
   <footer>
     © 2026 Naturopatía · Drs. Néstor & Frania Lepe
   </footer>
+
   <script>
     // ========== SUPABASE SETUP ==========
     const SUPABASE_URL = 'https://rrkynndpsphrghtequpc.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJya3lubmRwc3BocmdodGVxdXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU3NjEwNzYsImV4cCI6MjEwMTMzNzA3Nn0.P8Klj0UUJ58miAL2bjR1_iagxyA1TjNXxonb1SYLy6w';
+
+    console.log('Starting Supabase...');
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -402,10 +401,13 @@
     let currentUser = null;
 
     function showSection(id) {
+      console.log('Showing section:', id);
       ['loading', 'auth-section', 'locked-section', 'course-section'].forEach(s => {
-        document.getElementById(s).style.display = 'none';
+        const el = document.getElementById(s);
+        if (el) el.style.display = 'none';
       });
-      document.getElementById(id).style.display = 'block';
+      const target = document.getElementById(id);
+      if (target) target.style.display = 'block';
     }
 
     let isSignUp = false;
@@ -428,22 +430,26 @@
       const errorEl = document.getElementById('auth-error');
       errorEl.textContent = '';
 
-      if (isSignUp) {
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { data: { full_name: fullName } }
-        });
-        if (error) {
-          errorEl.textContent = error.message;
+      try {
+        if (isSignUp) {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { data: { full_name: fullName } }
+          });
+          if (error) {
+            errorEl.textContent = error.message;
+          } else {
+            errorEl.textContent = 'Cuenta creada. Ahora puedes iniciar sesión.';
+          }
         } else {
-          errorEl.textContent = 'Cuenta creada. Ahora puedes iniciar sesión.';
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+          if (error) {
+            errorEl.textContent = error.message;
+          }
         }
-      } else {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) {
-          errorEl.textContent = error.message;
-        }
+      } catch (err) {
+        errorEl.textContent = 'Error de conexión: ' + err.message;
       }
     });
 
@@ -456,29 +462,35 @@
       currentUser = user;
       document.getElementById('user-email').textContent = user.email;
 
-      const { data: course } = await supabase
-        .from('courses')
-        .select('id')
-        .eq('slug', 'fundamentos-naturopatia')
-        .single();
+      try {
+        const { data: course, error: courseError } = await supabase
+          .from('courses')
+          .select('id')
+          .eq('slug', 'fundamentos-naturopatia')
+          .single();
 
-      if (!course) {
-        alert('Curso no encontrado');
-        return;
-      }
-      COURSE_ID = course.id;
+        if (courseError || !course) {
+          console.error('Course error:', courseError);
+          showSection('locked-section');
+          return;
+        }
+        COURSE_ID = course.id;
 
-      const { data: enrollment } = await supabase
-        .from('enrollments')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('course_id', COURSE_ID)
-        .eq('status', 'active')
-        .maybeSingle();
+        const { data: enrollment } = await supabase
+          .from('enrollments')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('course_id', COURSE_ID)
+          .eq('status', 'active')
+          .maybeSingle();
 
-      if (enrollment) {
-        showSection('course-section');
-      } else {
+        if (enrollment) {
+          showSection('course-section');
+        } else {
+          showSection('locked-section');
+        }
+      } catch (err) {
+        console.error('checkAccess error:', err);
         showSection('locked-section');
       }
     }
@@ -499,13 +511,17 @@
         if (selected && selected.value === answers[q]) score++;
       }
 
-      await supabase.from('quiz_attempts').insert({
-        user_id: currentUser.id,
-        course_id: COURSE_ID,
-        score: score,
-        total_questions: 10,
-        answers: userAnswers
-      });
+      try {
+        await supabase.from('quiz_attempts').insert({
+          user_id: currentUser.id,
+          course_id: COURSE_ID,
+          score: score,
+          total_questions: 10,
+          answers: userAnswers
+        });
+      } catch (err) {
+        console.error('Error saving quiz:', err);
+      }
 
       document.getElementById('scoreDisplay').textContent = score + '/10';
       let feedback = score >= 8 ? '¡Excelente base de conocimiento!' :
@@ -517,24 +533,48 @@
     });
 
     async function init() {
-      const { data: { session } } = await supabase.auth.getSession();
+      console.log('Init started');
+      try {
+        // Fallback: if Supabase takes too long, show login anyway
+        const timeout = setTimeout(() => {
+          console.log('Timeout - forcing auth section');
+          showSection('auth-section');
+        }, 4000);
 
-      if (session?.user) {
-        await checkAccess(session.user);
-      } else {
-        showSection('auth-section');
-      }
+        const { data: { session }, error } = await supabase.auth.getSession();
+        clearTimeout(timeout);
 
-      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (error) {
+          console.error('getSession error:', error);
+          showSection('auth-section');
+          return;
+        }
+
         if (session?.user) {
           await checkAccess(session.user);
         } else {
           showSection('auth-section');
         }
-      });
+
+        supabase.auth.onAuthStateChange(async (event, session) => {
+          if (session?.user) {
+            await checkAccess(session.user);
+          } else {
+            showSection('auth-section');
+          }
+        });
+      } catch (err) {
+        console.error('Init error:', err);
+        showSection('auth-section');
+      }
     }
 
-    init();
+    if (window.supabase) {
+      init();
+    } else {
+      console.error('Supabase library not loaded');
+      showSection('auth-section');
+    }
   </script>
 </body>
 </html>
