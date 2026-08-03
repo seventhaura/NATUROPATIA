@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fundamentos de la Naturopatía | Curso</title>
-  
+ 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -69,7 +68,6 @@
       margin-bottom: 2.5rem;
       font-size: 1.15rem;
     }
-
     /* Auth Box */
     .auth-box {
       background: white;
@@ -121,7 +119,6 @@
       margin-bottom: 1rem;
       font-size: 0.95rem;
     }
-
     /* Locked message */
     .locked-box {
       background: white;
@@ -141,8 +138,7 @@
       text-decoration: none;
       font-weight: 600;
     }
-
-    /* Welcome + Quiz styles (same as before) */
+    /* Welcome + Quiz styles */
     .welcome-box {
       background: white;
       border-radius: 16px;
@@ -234,7 +230,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="nav">
       <a href="index.html" class="logo">NATURO<span>PATÍA</span></a>
@@ -244,34 +239,29 @@
       </div>
     </div>
   </header>
-
   <div class="container" id="app">
-
     <!-- Loading -->
     <div id="loading" style="text-align:center; padding:4rem 0;">
       <p>Cargando...</p>
     </div>
-
     <!-- AUTH SECTION -->
     <div id="auth-section" style="display:none;">
       <div class="auth-box">
         <h2 id="auth-title">Iniciar Sesión</h2>
         <div id="auth-error" class="error-msg"></div>
-        
+       
         <form id="auth-form">
           <input type="text" id="full-name" placeholder="Nombre completo" style="display:none;">
           <input type="email" id="email" placeholder="Correo electrónico" required>
           <input type="password" id="password" placeholder="Contraseña" required>
           <button type="submit" id="auth-btn">Entrar</button>
         </form>
-
         <div class="auth-toggle">
           <span id="toggle-text">¿No tienes cuenta?</span>
           <a id="toggle-link">Crear cuenta</a>
         </div>
       </div>
     </div>
-
     <!-- LOCKED (not enrolled) -->
     <div id="locked-section" style="display:none;">
       <div class="locked-box">
@@ -281,18 +271,15 @@
         <a href="cursos.html" class="btn">Ver cursos</a>
       </div>
     </div>
-
     <!-- COURSE CONTENT -->
     <div id="course-section" style="display:none;">
       <div class="user-bar">
         <span id="user-email"></span>
         <button onclick="logout()">Cerrar sesión</button>
       </div>
-
       <div class="course-label">Curso</div>
       <h1>Fundamentos de la Naturopatía</h1>
       <p class="subtitle">Bienvenido · Drs. Néstor & Frania Lepe</p>
-
       <div class="welcome-box">
         <div class="video-placeholder">
           <div class="play">▶</div>
@@ -301,19 +288,16 @@
         </div>
         <div class="doctors-message">
           <strong>Mensaje de los doctores:</strong><br><br>
-          “¡Felicitaciones por comenzar el curso <em>Fundamentos de la Naturopatía</em>!  
-          En las próximas semanas vamos a construir una base sólida.  
-          Responde el cuestionario con calma y honestidad.”  
+          “¡Felicitaciones por comenzar el curso <em>Fundamentos de la Naturopatía</em>!
+          En las próximas semanas vamos a construir una base sólida.
+          Responde el cuestionario con calma y honestidad.”
           <br><br>— Dr. Néstor Lepe & Dra. Frania Lepe
         </div>
       </div>
-
       <div class="quiz-section">
         <h2>Cuestionario Inicial</h2>
         <p style="color:#5a6b5c; margin-bottom:2rem;">Responde las siguientes 10 preguntas.</p>
-
         <form id="quizForm">
-          <!-- Questions (same as before) -->
           <div class="question">
             <h3>1. La naturopatía se basa principalmente en el principio de que el cuerpo tiene una fuerza vital de autocuración.</h3>
             <div class="options">
@@ -394,10 +378,8 @@
               <label><input type="radio" name="q10" value="false"> Falso</label>
             </div>
           </div>
-
           <button type="submit" class="submit-quiz">Ver mis resultados</button>
         </form>
-
         <div id="results">
           <h3>¡Cuestionario completado!</h3>
           <div class="score" id="scoreDisplay">0/10</div>
@@ -405,25 +387,20 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <footer>
     © 2026 Naturopatía · Drs. Néstor & Frania Lepe
   </footer>
-
   <script>
     // ========== SUPABASE SETUP ==========
     const SUPABASE_URL = 'https://rrkynndpsphrghtequpc.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_mUgbT5UW2lGBM5gYCipuqg__Lg3wptt';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJya3lubmRwc3BocmdodGVxdXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU3NjEwNzYsImV4cCI6MjEwMTMzNzA3Nn0.P8Klj0UUJ58miAL2bjR1_iagxyA1TjNXxonb1SYLy6w';
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Course ID for Fundamentos (we will get it dynamically)
     let COURSE_ID = null;
     let currentUser = null;
 
-    // ========== UI HELPERS ==========
     function showSection(id) {
       ['loading', 'auth-section', 'locked-section', 'course-section'].forEach(s => {
         document.getElementById(s).style.display = 'none';
@@ -431,7 +408,6 @@
       document.getElementById(id).style.display = 'block';
     }
 
-    // ========== AUTH LOGIC ==========
     let isSignUp = false;
 
     document.getElementById('toggle-link').addEventListener('click', () => {
@@ -450,7 +426,6 @@
       const password = document.getElementById('password').value;
       const fullName = document.getElementById('full-name').value;
       const errorEl = document.getElementById('auth-error');
-
       errorEl.textContent = '';
 
       if (isSignUp) {
@@ -462,7 +437,7 @@
         if (error) {
           errorEl.textContent = error.message;
         } else {
-          errorEl.textContent = 'Revisa tu correo para confirmar la cuenta.';
+          errorEl.textContent = 'Cuenta creada. Ahora puedes iniciar sesión.';
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
@@ -477,12 +452,10 @@
       location.reload();
     }
 
-    // ========== CHECK ACCESS ==========
     async function checkAccess(user) {
       currentUser = user;
       document.getElementById('user-email').textContent = user.email;
 
-      // Get course ID
       const { data: course } = await supabase
         .from('courses')
         .select('id')
@@ -495,7 +468,6 @@
       }
       COURSE_ID = course.id;
 
-      // Check enrollment
       const { data: enrollment } = await supabase
         .from('enrollments')
         .select('id')
@@ -511,7 +483,6 @@
       }
     }
 
-    // ========== QUIZ ==========
     const answers = {
       q1: "true", q2: "a", q3: "b", q4: "false", q5: "b",
       q6: "false", q7: "a", q8: "true", q9: "a", q10: "false"
@@ -528,7 +499,6 @@
         if (selected && selected.value === answers[q]) score++;
       }
 
-      // Save to Supabase
       await supabase.from('quiz_attempts').insert({
         user_id: currentUser.id,
         course_id: COURSE_ID,
@@ -546,7 +516,6 @@
       document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // ========== INIT ==========
     async function init() {
       const { data: { session } } = await supabase.auth.getSession();
 
@@ -556,7 +525,6 @@
         showSection('auth-section');
       }
 
-      // Listen for auth changes
       supabase.auth.onAuthStateChange(async (event, session) => {
         if (session?.user) {
           await checkAccess(session.user);
